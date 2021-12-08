@@ -49,7 +49,8 @@
     // Példa1: echo $ipPublic;
     // Példa2: echo "<h6 style='width: 100%; text-align: center;'>$ipPublic</h6>";
     // Példa3: echo "<div style='width: 100%; text-align: center;'>AZ Ön MAC címe: $ipPublic</div>";  
-    // Megjegyzés: a Szerver IP címet nem ajánlott nyílvánosan megjeleníteni, biztonsági okokból! A publikus IP - t is csak fiók korlátozására ajánlott használni. 
+    // Megjegyzés: a Szerver IP címet nem ajánlott nyílvánosan megjeleníteni, biztonsági okokból! A publikus IP - t is csak fiók korlátozására ajánlott használni.
+/*======================================================================================================*/
     // Böngésző motor lekérdezése
     $web = "Böngésző motor: " . $_SERVER['HTTP_USER_AGENT'];
     // Példa1: echo $web;
