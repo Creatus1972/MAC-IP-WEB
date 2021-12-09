@@ -1,7 +1,11 @@
 <?php
     // MAC cím lekérdezése - 1
     $MAC = exec('getmac');
-    $MAC = "Az Ön MAC címe: " . strtok($MAC, ' ');
+    if (!empty($MAC)) {
+        $MAC = "Az Ön MAC címe: " . strtok($MAC, ' ');
+    } else {
+        $MAC = 'Az Ön MAC címe: ISMERETLEN<br><i style="font-size: 14px; color: #cc0033 !important;">(Előfordulhat, hogy a tárhely-szolgáltatója biztonsági okokból nem engedélyezi a MAC cím megjelenítését!)</i>';
+    }
     // Példa1: echo $MAC;
     // Példa2: echo "<h6 style='width: 100%; text-align: center;'>$MAC</h6>";
     // Példa3: echo "<div style='width: 100%; text-align: center;'>AZ Ön MAC címe: $MAC</div>";
