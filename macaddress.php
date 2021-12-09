@@ -33,9 +33,9 @@
     $find_mac = "Physical"; 
     $pmac = strpos($mycomsys, $find_mac); 
     $macaddress = "Az Ön MAC címe: " . substr($mycomsys,($pmac+36),17);  
-    // Példa1: echo $MAC;
-    // Példa2: echo "<h6 style='width: 100%; text-align: center;'>$MAC</h6>";
-    // Példa3: echo "<div style='width: 100%; text-align: center;'>AZ Ön MAC címe: $MAC</div>";  
+    // Példa1: echo $macaddress;
+    // Példa2: echo "<h6 style='width: 100%; text-align: center;'>$macaddress</h6>";
+    // Példa3: echo "<div style='width: 100%; text-align: center;'>AZ Ön MAC címe: $macaddress</div>";  
     // Csak LOCALHOST - on működik.
 /*======================================================================================================*/
     // MAC cím lekérdezése - 4
@@ -63,17 +63,17 @@
     $web = "Böngésző motor: " . $_SERVER['HTTP_USER_AGENT'];
     // Példa1: echo $web;
     // Példa2: echo "<h6 style='width: 100%; text-align: center;'>$web</h6>";
-    // Példa3: echo "<div style='width: 100%; text-align: center;'>Böngésző motor: $MAC</div>";
+    // Példa3: echo "<div style='width: 100%; text-align: center;'>Böngésző motor: $web</div>";
 /*======================================================================================================*/
     // Szervernév (Domain) lekérdezése
     $ServerName = "Szervernév: " . $_SERVER['SERVER_NAME'];
     // Példa1: echo $ServerName;
     // Példa2: echo "<h6 style='width: 100%; text-align: center;'>$ServerName</h6>";
-    // Példa3: echo "<div style='width: 100%; text-align: center;'>Böngésző motor: $ipServerName</div>";
+    // Példa3: echo "<div style='width: 100%; text-align: center;'>Böngésző motor: $ServerName</div>";
 /*======================================================================================================*/
     // Szerver-szoftver lekérdezése
     $ServerSoftware = "Szerver-szoftver: " . $_SERVER['SERVER_SOFTWARE'];
-    // Példa1: echo $ipServerName;
+    // Példa1: echo $ServerSoftware;
     // Példa2: echo "<h6 style='width: 100%; text-align: center;'>$ServerSoftware</h6>";
     // Példa3: echo "<div style='width: 100%; text-align: center;'>Böngésző motor: $ServerSoftware</div>";
 /*======================================================================================================*/
@@ -132,7 +132,7 @@
        $password = $_POST["password"]; ...vagy így (Bármelyik használható)                              >>> 2.
     
        $password = passwordGenerator();
-       A $password egy véletlenszerűen generált jelszót ad vissza. Aktiváló jelszóhoz ez tökéletes lehet. Jelenleg 10 karakterből áll, de ez  módosítható.
+       A $password egy véletlenszerűen generált jelszót ad vissza. Aktiváló kódhoz ez tökéletes lehet. Jelenleg 10 karakterből áll, de ez  módosítható.
     */
 /*======================================================================================================*/
     // Jelszó titkosítás
