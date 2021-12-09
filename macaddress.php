@@ -8,7 +8,7 @@
     }
     // Példa1: echo $MAC;
     // Példa2: echo "<h6 style='width: 100%; text-align: center;'>$MAC</h6>";
-    // Példa3: echo "<div style='width: 100%; text-align: center;'>AZ Ön MAC címe: $MAC</div>";
+    // Példa3: echo "<div style='width: 100%; text-align: center;'>$MAC</div>";
     // Csak LOCALHOST - on működik
 /*======================================================================================================*/
     // MAC cím lekérdezése - 2 
@@ -22,7 +22,7 @@
     }
     // Példa1: echo $MACADDR;
     // Példa2: echo "<h6 style='width: 100%; text-align: center;'>$MACADDR</h6>";
-    // Példa3: echo "<div style='width: 100%; text-align: center;'>AZ Ön MAC címe: $MACADDR</div>";
+    // Példa3: echo "<div style='width: 100%; text-align: center;'>$MACADDR</div>";
     // Csak LOCALHOST - on működik.
 /*======================================================================================================*/
     // MAC cím lekérdezése - 3
@@ -35,7 +35,7 @@
     $macaddress = "Az Ön MAC címe: " . substr($mycomsys,($pmac+36),17);  
     // Példa1: echo $macaddress;
     // Példa2: echo "<h6 style='width: 100%; text-align: center;'>$macaddress</h6>";
-    // Példa3: echo "<div style='width: 100%; text-align: center;'>AZ Ön MAC címe: $macaddress</div>";  
+    // Példa3: echo "<div style='width: 100%; text-align: center;'>$macaddress</div>";  
     // Csak LOCALHOST - on működik.
 /*======================================================================================================*/
     // MAC cím lekérdezése - 4
@@ -46,8 +46,8 @@
         ob_clean();
         return substr($Content, strpos($Content,'\\')-20, 17);
     }
-    // Példa1: echo GetMAC();
-    // Példa2: echo "<h6 style='width: 100%; text-align: center;'>".GetMAC()."</h6>";
+    // Példa1: echo "AZ Ön MAC címe: " . GetMAC();
+    // Példa2: echo "<h6 style='width: 100%; text-align: center;'>AZ Ön MAC címe: ".GetMAC()."</h6>";
     // Példa3: echo "<div style='width: 100%; text-align: center;'>AZ Ön MAC címe: ".GetMAC()."</div>";
     // Csak LOCALHOST - on működik.
 /*======================================================================================================*/
@@ -56,26 +56,26 @@
     $ipPublic = "Publikus IP cím: " . $_SERVER['REMOTE_ADDR']; // Publikus (Internet szolgáltató által kiosztott) - Fix, Dinamikus
     // Példa1: echo $ipPublic;
     // Példa2: echo "<h6 style='width: 100%; text-align: center;'>$ipPublic</h6>";
-    // Példa3: echo "<div style='width: 100%; text-align: center;'>AZ Ön MAC címe: $ipPublic</div>";  
+    // Példa3: echo "<div style='width: 100%; text-align: center;'>$ipPublic</div>";  
     // Megjegyzés: a Szerver IP címet nem ajánlott nyílvánosan megjeleníteni, biztonsági okokból! A publikus IP - t is csak fiók korlátozására ajánlott használni. 
 /*======================================================================================================*/
     // Böngésző motor lekérdezése
     $web = "Böngésző motor: " . $_SERVER['HTTP_USER_AGENT'];
     // Példa1: echo $web;
     // Példa2: echo "<h6 style='width: 100%; text-align: center;'>$web</h6>";
-    // Példa3: echo "<div style='width: 100%; text-align: center;'>Böngésző motor: $web</div>";
+    // Példa3: echo "<div style='width: 100%; text-align: center;'>$web</div>";
 /*======================================================================================================*/
     // Szervernév (Domain) lekérdezése
     $ServerName = "Szervernév: " . $_SERVER['SERVER_NAME'];
     // Példa1: echo $ServerName;
     // Példa2: echo "<h6 style='width: 100%; text-align: center;'>$ServerName</h6>";
-    // Példa3: echo "<div style='width: 100%; text-align: center;'>Böngésző motor: $ServerName</div>";
+    // Példa3: echo "<div style='width: 100%; text-align: center;'>$ServerName</div>";
 /*======================================================================================================*/
     // Szerver-szoftver lekérdezése
     $ServerSoftware = "Szerver-szoftver: " . $_SERVER['SERVER_SOFTWARE'];
-    // Példa1: echo $ServerSoftware;
+    // Példa1: echo $ipServerName;
     // Példa2: echo "<h6 style='width: 100%; text-align: center;'>$ServerSoftware</h6>";
-    // Példa3: echo "<div style='width: 100%; text-align: center;'>Böngésző motor: $ServerSoftware</div>";
+    // Példa3: echo "<div style='width: 100%; text-align: center;'>$ServerSoftware</div>";
 /*======================================================================================================*/
     // Konstansok titkosításhoz, jelszó ellenőrzéshez, illetve véletlenszerű jelszó generáláshoz
     define("CHARACTERS", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
