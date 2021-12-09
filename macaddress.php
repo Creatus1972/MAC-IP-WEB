@@ -77,8 +77,106 @@
     // Példa2: echo "<h6 style='width: 100%; text-align: center;'>$ServerSoftware</h6>";
     // Példa3: echo "<div style='width: 100%; text-align: center;'>Böngésző motor: $ServerSoftware</div>";
 /*======================================================================================================*/
+define("CHARACTERS", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
+define("LC", "abcdefghijklmnopqrstuvwxyz");
+define("UC", mb_strtoupper(LC));
+define("NR", "0123456789");
+define("SC", "+-!?.,:;(){}[]=*/%'\"\\\$");
+/*======================================================================================================*/
+function passwordVerify($password, $minkbdb, $minnbdb, $minszdb, $minijdb) {
+    $kbdb = 0;
+    $nbdb = 0;
+    $szdb = 0;
+    $ijdb = 0;
+    for ($i = 0; $i < mb_strlen($password); $i++) {
+        if (mb_strpos(LC, $password[$i]) !== false) { // A példa szerint 2 kell
+            $kbdb++;
+        } else
+        if (mb_strpos(UC, $password[$i]) !== false) { // A példa szerint 1 kell
+            $nbdb++;
+        } else
+        if (mb_strpos(NR, $password[$i]) !== false) { // A példa szerint 2 kell
+            $szdb++;
+        } else
+        if (mb_strpos(SC, $password[$i]) !== false) { // A példa szerint nem kell egy sem
+            $ijdb++;
+        }
+    }
+    return $kbdb >= $minkbdb && $nbdb >= $minnbdb && $szdb >= $minszdb && $ijdb >= $minijdb;
+}
+    /* PÉLDA
     
+       $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_SPECIAL_CHARS); Így is lehet... >>> 1.
+       $password = $_POST["password"]; ...vagy így (Bármelyik használható)                              >>> 2.
+    
+       if (!passwordVerify($password, 2, 1, 2, 0)) { Ha nem egyeznek a feltételek egy hibaüzenetet generál!
+           echo "Hiba! A jelszónak tartalmaznia kell legalább kettőt az alábbiakból: kisbetű, számjegy!";
+       } else {
+           PHP vagy MySL kód...
+       }
+    */
+/*======================================================================================================*/
+function passwordGenerator() {
+    $password = "";
+    for ($i = 0; $i < 10; $i++) {
+        $password .= CHARACTERS[rand(0, strlen(CHARACTERS) - 1)];
+    }
+    return $password;
+}
+    /* PÉLDA
+    
+       $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_SPECIAL_CHARS); Így is lehet... >>> 1.
+       $password = $_POST["password"]; ...vagy így (Bármelyik használható)                              >>> 2.
+    
+       $password = passwordGenerator();
+       A $password egy véletlenszerűen generált jelszót ad vissza. Aktiváló jelszóhoz ez tökéletes lehet. Jelenleg 10 karakterből áll, de ez  módosítható.
+    */
+/*======================================================================================================*/
+function encrypts($password) {
+    $secret = "";
+    for ($i = 1; $i <= 45; $i++) {
+        $secret .= "password(";
+    }
+    $secret .= "'$password'";
+    for ($i = 1; $i <= 45; $i++) {
+        $secret .= ")";
+    }
+    return $secret;
+}  
+    /* PÉLDA
+    
+       $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_SPECIAL_CHARS); Így is lehet... >>> 1.
+       $password = $_POST["password"]; ...vagy így (Bármelyik használható)                              >>> 2.
+    
+       $password = encrypts("Jelszó1234");
+       Eredmény: *3F6D5EC0FA98D3A13F631D6C99D11F4DB9A36365 >>> Felhasználói regisztrációhoz ajánlott csak, azon belül MySQL felhasználói jelszóhoz
+       
+       FONTOS: A TITKOSÍTOTT JELSZÓT SEMMILYEN FORMÁBAN NEM LEHET KIÍRATNI!
+      
+       Az ECHO eredménye ez lenne: 
+       
+       echo $password;
+       
+       LÁTHATÓ EREDMÉNY: 
+     
+       password(password(password(password(password(password(password(password(password(password(password(password(password(password(password(password(password(password(password(password(password(password(password(password(password(password(password(password(password(password(password(password(password(password(password(password(password(password(password(password(password(password(password(password(password('Jelszó1234')))))))))))))))))))))))))))))))))))))))))))))
+     
+       $sql = "insert into users (password) values (" . encrypts($password) . ")";
+       mysqli_query($dbc, $sql);
+     
+       VAGY
+     
+       $sql = "update users set password = " . encrypts($password) . " where uid = " . $_SESSION["uid"];
+       mysqli_query($dbc, $sql);
+     
+       MySQL ADATBÁZIS-TÁBLÁBA MENTETT EREDMÉNY:
+     
+       *3F6D5EC0FA98D3A13F631D6C99D11F4DB9A36365
+    */
+/*======================================================================================================*/
 /* 
+A következő táblázat felsorolja a legfontosabb elemeket, amelyek a $_SERVER belsejébe kerülhetnek:
+
 $_SERVER['SERVER_PROTOCOL']         Visszaadja az információs protokoll nevét és változatát (például HTTP/1.1)
 $_SERVER['REQUEST_METHOD']          Az oldal eléréséhez használt kérési módot adja vissza (például POST)
 $_SERVER['REQUEST_TIME']            A kérés kezdetének időbélyegét adja vissza (például 1377687496)
@@ -98,5 +196,7 @@ $_SERVER['SERVER_SIGNATURE']        A kiszolgáló által generált oldalakhoz h
 $_SERVER['PATH_TRANSLATED']         Visszaadja az aktuális szkript fájlrendszer alapú elérési útját
 $_SERVER['SCRIPT_NAME']             Az aktuális szkript elérési útját adja vissza
 $_SERVER['SCRIPT_URI']              Az aktuális oldal URI-jét adja vissza
+======================================================================================================
+
 */
 ?>
