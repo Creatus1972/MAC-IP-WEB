@@ -5,6 +5,7 @@
     // Példa1: echo $MAC;
     // Példa2: echo "<h6 style='width: 100%; text-align: center;'>$MAC</h6>";
     // Példa3: echo "<div style='width: 100%; text-align: center;'>AZ Ön MAC címe: $MAC</div>";
+    // Csak LOCALHOST - on működik
 /*======================================================================================================*/
     // MAC cím lekérdezése - 2 
     $ip = substr(shell_exec ("ipconfig/all"),1821,18);
@@ -18,6 +19,7 @@
     // Példa1: echo $MACADDR;
     // Példa2: echo "<h6 style='width: 100%; text-align: center;'>$MACADDR</h6>";
     // Példa3: echo "<div style='width: 100%; text-align: center;'>AZ Ön MAC címe: $MACADDR</div>";
+    // Csak LOCALHOST - on működik.
 /*======================================================================================================*/
     // MAC cím lekérdezése - 3
     ob_start();   
@@ -30,6 +32,7 @@
     // Példa1: echo $MAC;
     // Példa2: echo "<h6 style='width: 100%; text-align: center;'>$MAC</h6>";
     // Példa3: echo "<div style='width: 100%; text-align: center;'>AZ Ön MAC címe: $MAC</div>";  
+    // Csak LOCALHOST - on működik.
 /*======================================================================================================*/
     // MAC cím lekérdezése - 4
     function GetMAC(){
@@ -42,6 +45,7 @@
     // Példa1: echo GetMAC();
     // Példa2: echo "<h6 style='width: 100%; text-align: center;'>".GetMAC()."</h6>";
     // Példa3: echo "<div style='width: 100%; text-align: center;'>AZ Ön MAC címe: ".GetMAC()."</div>";
+    // Csak LOCALHOST - on működik.
 /*======================================================================================================*/
     // IP cím lekérdezése
     $ipServer = "Szerver IP cím: " . $_SERVER['SERVER_ADDR']; // Szerver (Domain szolgáltató) - Fix
@@ -71,7 +75,6 @@
 /*======================================================================================================*/
     
 /* 
-
 $_SERVER['SERVER_PROTOCOL']         Visszaadja az információs protokoll nevét és változatát (például HTTP/1.1)
 $_SERVER['REQUEST_METHOD']          Az oldal eléréséhez használt kérési módot adja vissza (például POST)
 $_SERVER['REQUEST_TIME']            A kérés kezdetének időbélyegét adja vissza (például 1377687496)
@@ -91,6 +94,5 @@ $_SERVER['SERVER_SIGNATURE']        A kiszolgáló által generált oldalakhoz h
 $_SERVER['PATH_TRANSLATED']         Visszaadja az aktuális szkript fájlrendszer alapú elérési útját
 $_SERVER['SCRIPT_NAME']             Az aktuális szkript elérési útját adja vissza
 $_SERVER['SCRIPT_URI']              Az aktuális oldal URI-jét adja vissza
-
 */
 ?>
