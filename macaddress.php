@@ -77,33 +77,35 @@
     // Példa2: echo "<h6 style='width: 100%; text-align: center;'>$ServerSoftware</h6>";
     // Példa3: echo "<div style='width: 100%; text-align: center;'>Böngésző motor: $ServerSoftware</div>";
 /*======================================================================================================*/
-define("CHARACTERS", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
-define("LC", "abcdefghijklmnopqrstuvwxyz");
-define("UC", mb_strtoupper(LC));
-define("NR", "0123456789");
-define("SC", "+-!?.,:;(){}[]=*/%'\"\\\$");
+    // Konstansok titkosításhoz, jelszó ellenőrzéshez, illetve véletlenszerű jelszó generáláshoz
+    define("CHARACTERS", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
+    define("LC", "abcdefghijklmnopqrstuvwxyz");
+    define("UC", mb_strtoupper(LC));
+    define("NR", "0123456789");
+    define("SC", "+-!?.,:;(){}[]=*/%'\"\\\$");
 /*======================================================================================================*/
-function passwordVerify($password, $minkbdb, $minnbdb, $minszdb, $minijdb) {
-    $kbdb = 0;
-    $nbdb = 0;
-    $szdb = 0;
-    $ijdb = 0;
-    for ($i = 0; $i < mb_strlen($password); $i++) {
-        if (mb_strpos(LC, $password[$i]) !== false) { // A példa szerint 2 kell
-            $kbdb++;
-        } else
-        if (mb_strpos(UC, $password[$i]) !== false) { // A példa szerint 1 kell
-            $nbdb++;
-        } else
-        if (mb_strpos(NR, $password[$i]) !== false) { // A példa szerint 2 kell
-            $szdb++;
-        } else
-        if (mb_strpos(SC, $password[$i]) !== false) { // A példa szerint nem kell egy sem
-            $ijdb++;
+    // Jelszó ellenőrzés
+    function passwordVerify($password, $minkbdb, $minnbdb, $minszdb, $minijdb) {
+        $kbdb = 0;
+        $nbdb = 0;
+        $szdb = 0;
+        $ijdb = 0;
+        for ($i = 0; $i < mb_strlen($password); $i++) {
+            if (mb_strpos(LC, $password[$i]) !== false) { // A példa szerint 2 kell
+                $kbdb++;
+            } else
+            if (mb_strpos(UC, $password[$i]) !== false) { // A példa szerint 1 kell
+                $nbdb++;
+            } else
+            if (mb_strpos(NR, $password[$i]) !== false) { // A példa szerint 2 kell
+                $szdb++;
+            } else
+            if (mb_strpos(SC, $password[$i]) !== false) { // A példa szerint nem kell egy sem
+                $ijdb++;
+            }
         }
+        return $kbdb >= $minkbdb && $nbdb >= $minnbdb && $szdb >= $minszdb && $ijdb >= $minijdb;
     }
-    return $kbdb >= $minkbdb && $nbdb >= $minnbdb && $szdb >= $minszdb && $ijdb >= $minijdb;
-}
     /* PÉLDA
     
        $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_SPECIAL_CHARS); Így is lehet... >>> 1.
@@ -116,13 +118,14 @@ function passwordVerify($password, $minkbdb, $minnbdb, $minszdb, $minijdb) {
        }
     */
 /*======================================================================================================*/
-function passwordGenerator() {
-    $password = "";
-    for ($i = 0; $i < 10; $i++) {
-        $password .= CHARACTERS[rand(0, strlen(CHARACTERS) - 1)];
+    // Jelszó generátor
+    function passwordGenerator() {
+        $password = "";
+        for ($i = 0; $i < 10; $i++) {
+            $password .= CHARACTERS[rand(0, strlen(CHARACTERS) - 1)];
+        }
+        return $password;
     }
-    return $password;
-}
     /* PÉLDA
     
        $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_SPECIAL_CHARS); Így is lehet... >>> 1.
@@ -132,17 +135,18 @@ function passwordGenerator() {
        A $password egy véletlenszerűen generált jelszót ad vissza. Aktiváló jelszóhoz ez tökéletes lehet. Jelenleg 10 karakterből áll, de ez  módosítható.
     */
 /*======================================================================================================*/
-function encrypts($password) {
-    $secret = "";
-    for ($i = 1; $i <= 45; $i++) {
-        $secret .= "password(";
-    }
-    $secret .= "'$password'";
-    for ($i = 1; $i <= 45; $i++) {
-        $secret .= ")";
-    }
-    return $secret;
-}  
+    // Jelszó titkosítás
+    function encrypts($password) {
+        $secret = "";
+        for ($i = 1; $i <= 45; $i++) {
+            $secret .= "password(";
+        }
+        $secret .= "'$password'";
+        for ($i = 1; $i <= 45; $i++) {
+            $secret .= ")";
+        }
+        return $secret;
+    }  
     /* PÉLDA
     
        $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_SPECIAL_CHARS); Így is lehet... >>> 1.
@@ -196,7 +200,5 @@ $_SERVER['SERVER_SIGNATURE']        A kiszolgáló által generált oldalakhoz h
 $_SERVER['PATH_TRANSLATED']         Visszaadja az aktuális szkript fájlrendszer alapú elérési útját
 $_SERVER['SCRIPT_NAME']             Az aktuális szkript elérési útját adja vissza
 $_SERVER['SCRIPT_URI']              Az aktuális oldal URI-jét adja vissza
-======================================================================================================
-
-*/
+/*======================================================================================================*/
 ?>
